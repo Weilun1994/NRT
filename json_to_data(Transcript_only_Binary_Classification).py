@@ -7,6 +7,7 @@ Created on Tue Mar 14 21:23:32 2017
 
 import json
 import numpy as np
+import collections
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.utils.np_utils import to_categorical
@@ -49,6 +50,19 @@ x_cs=char_to_int(x_cs)
 
 x=[x_ac,x_as,x_cc,x_cs]
 y=[y_ac,y_as,y_cc,y_cs]
+
+all_subtask_label=collections.defaultdict()
+
+for dic in y:
+    for key,value in dic.items():
+        all_subtask_label[key]=value
+        
+        
+path='C:/Users/weilun/Desktop'
+os.chdir(path)
+        
+with open('all_subtask_label.json','w') as dic:
+    json.dump(all_subtask_label,dic)
 
 def dic_to_list(x,y):
     subject=[]
